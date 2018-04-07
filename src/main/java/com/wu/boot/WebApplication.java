@@ -1,3 +1,4 @@
+/*
 package com.wu.boot;
 
 import com.wu.boot.configuration.MyMvcConfig;
@@ -23,3 +24,4 @@ public class WebApplication implements WebApplicationInitializer{
     }
 
 }
+*/

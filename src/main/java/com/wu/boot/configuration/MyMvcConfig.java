@@ -62,17 +62,11 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         multipartResolver.setMaxUploadSize(1000000);
         return multipartResolver;
     }
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(converter());
-        converters.add(jackson2HttpMessageConverter());
-        converters.add(elementHttpMessageConverter());
-    }
-
     @Bean
     public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter(){
         MappingJackson2HttpMessageConverter converter=new MappingJackson2HttpMessageConverter();
         return converter;
+
     }
     @Bean
     public Jaxb2RootElementHttpMessageConverter elementHttpMessageConverter(){
@@ -82,4 +76,11 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
     public MyMessageConverter converter(){
         return new MyMessageConverter();
     }
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(converter());
+        converters.add(jackson2HttpMessageConverter());
+        converters.add(elementHttpMessageConverter());
+    }
 }
+

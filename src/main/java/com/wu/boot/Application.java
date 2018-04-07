@@ -1,4 +1,3 @@
-/*
 package com.wu.boot;
 
 import com.wu.boot.configuration.MyMvcConfig;
@@ -19,4 +18,3 @@ public class Application extends SpringBootServletInitializer {
         SpringApplication.run(Application.class, args);
     }
 }
-*/
