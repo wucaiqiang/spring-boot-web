@@ -18,6 +18,7 @@ public class IndexController {
     public String index() throws Exception {
         System.out.println("调用页面开始...");
         String aaaa="aaa";
+        String bbbb="bbbb";
         return "index";
     }
     @RequestMapping(value = "/test1",produces = "application/json;charset=UTF-8")
