@@ -25,6 +25,7 @@ public class IndexController {
         String id=request.getParameter("id");
         System.out.println("参数："+id);
         System.out.println("参数："+name);
+        String tttt="ttttt";
         return "汉字";
     }
     @RequestMapping(value = "/test2/{str}",produces = "application/json;charset=UTF-8")
