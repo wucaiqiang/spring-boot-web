@@ -32,6 +32,7 @@ public class IndexController {
     @RequestMapping(value = "/test2/{str}",produces = "application/json;charset=UTF-8")
     @ResponseBody
     public List<User> test2(User user,@PathVariable  String str) throws Exception {
+        String tttt="ttttt";
         System.out.println("path:"+str);
         List<User> users=new ArrayList<>();
         users.add(user);
