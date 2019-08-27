@@ -1,5 +1,7 @@
 package com.wu.boot.controller;
 
+import com.wu.boot.annotation.MyRequestBody;
+import com.wu.boot.annotation.MyResponseBody;
 import com.wu.boot.dto.MessageDto;
 import com.wu.boot.dto.User;
 import org.springframework.stereotype.Controller;
@@ -57,10 +59,17 @@ public class IndexController {
         return  dto;
     }
 
+
     @RequestMapping(value = "/test6")
     @ResponseBody
-    public String test6(String dto) throws Exception {
+    public String test6(@RequestBody User dto) throws Exception {
         System.out.println(dto);
-        return "成功";
+        return "ok";
+    }
+    @RequestMapping(value = "/test7",produces = "application/wucq;charset=UTF-8")
+    @MyResponseBody
+    public User test7(@MyRequestBody User dto) throws Exception {
+        System.out.println(dto);
+        return dto;
     }
 }

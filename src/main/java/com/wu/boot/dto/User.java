@@ -1,9 +1,10 @@
 package com.wu.boot.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @XmlRootElement
-public class User {
+public class User implements Serializable {
     private int age;
     private String name;
 

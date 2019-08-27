@@ -3,18 +3,23 @@ package com.wu.boot.configuration;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.wu.boot.converter.MyMessageConverter;
 import com.wu.boot.interceptor.MyInterceptor;
+import com.wu.boot.resolver.MyResolver;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -73,12 +78,27 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         return new Jaxb2RootElementHttpMessageConverter();
     }
     @Bean
-    public MyMessageConverter converter(){
+    public MyMessageConverter myConverter(){
         return new MyMessageConverter();
     }
+    @Bean
+    @ConditionalOnMissingBean
+    public MyResolver myresolver() {
+        return new MyResolver(Arrays.asList(myConverter()));
+    }
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(myresolver());
+    }
+
+    @Override
+    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> handlers) {
+        handlers.add(myresolver());
+    }
+
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(converter());
+//        converters.add(converter());
         converters.add(jackson2HttpMessageConverter());
         converters.add(elementHttpMessageConverter());
     }
